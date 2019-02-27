@@ -1,4 +1,4 @@
-package src.DCJ;
+package dcj;
 
 public class Main {
 

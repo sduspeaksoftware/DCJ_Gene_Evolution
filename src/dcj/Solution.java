@@ -1,4 +1,4 @@
-package DCJ;
+package dcj;
 
 public class Solution {
 
