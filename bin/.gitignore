@@ -1,2 +1,6 @@
+.classpath
+/.gitignore
+/.project
+/.settings/
+/README.md
 /src/
-/Gene.class
