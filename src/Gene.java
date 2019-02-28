@@ -7,9 +7,17 @@ public class Gene {
 		//判断正反
 		if(name.charAt(0) == '-'){
 			this.reverse = true;
-			this.name = name.subString(1);
+			this.name = name.substring(1);
 		}else{
 			this.name = name;
+		}
+		if (reverse==false) {
+			push(tail);
+			push(head);
+		}
+		else {
+			push(head);
+			push(tail);
 		}
 		//头尾节点
 		this.head = new Node(name, "head");
