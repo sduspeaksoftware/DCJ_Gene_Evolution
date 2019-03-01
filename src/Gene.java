@@ -11,16 +11,10 @@ public class Gene {
 		}else{
 			this.name = name;
 		}
-		if (reverse==false) {
-			push(tail);
-			push(head);
-		}
-		else {
-			push(head);
-			push(tail);
-		}
 		//头尾节点
 		this.head = new Node(name, "head");
 		this.tail = new Node(name, "tail");
+		this.head.father = this;
+		this.tail.father = this;
 	}
 }
