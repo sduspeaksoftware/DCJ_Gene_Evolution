@@ -1,9 +1,9 @@
 import java.util.ArrayList;
-
-public class Genome {
+public class Genome implements Cloneable{
 	int numOfGenes;
 	boolean circular = false;
 	ArrayList<Node> geneNodeList = new ArrayList<Node>();
+	
 	public Genome(Node node) {
 		//geneNodeList加个头
 		this.addExHead();
@@ -17,6 +17,7 @@ public class Genome {
 	public void addExTail() {
 		this.geneNodeList.add(new Node("extail", "ex"));
 		this.buildAllLineLink();  //加上extail后立刻执行全链连接
+		Log.i("Genome ExTail added, auto link all line.");
 	}
 	
 	public void addGene(String name) {
@@ -39,12 +40,43 @@ public class Genome {
 		}
 	}
 	
-	public Node getFirstNoDiffNodeByName(String name) {
-		for(Node n : this.geneNodeList) {
-			if(n.diffLink == null && n.nameht == name) {
-				return n;
+	@Override
+	public Object clone() {
+		Genome cloneT = (Genome)this.clone();
+		ArrayList<Node> gnlCloneT = new ArrayList<Node>();
+		for(Node i : cloneT.geneNodeList) {
+			gnlCloneT.add((Node)i.clone());
+		}
+		cloneT.geneNodeList = gnlCloneT;
+		return (Object)cloneT;
+	}
+	
+	public static void diguiLoopNode(Genome genome1, Genome genome2) {
+		Genome g1 = (Genome)genome1.clone();
+		Genome g2 = (Genome)genome2.clone();
+		for(Node i : g1.geneNodeList) {
+			if(i.diffLink == null) {
+				for(Node j:g2.geneNodeList) {
+					if (i.nameht ==j.nameht && j.diffLink ==null) {
+						i.diffLink =j;
+						j.diffLink =i;
+						diguiLoopNode(g1,g2);
+					}
+				}
 			}
 		}
-		return null;
+		System.out.println(getNumOfCircles(g1,g2));
+	}
+
+	private static int getNumOfCircles(Genome g1, Genome g2) {
+		int num = 0;
+		for(Node i : g1.geneNodeList) {
+			if(!i.searched) {
+				if(i.searchLink()) {
+					num++;
+				}
+			}
+		}
+		return num;
 	}
 }
