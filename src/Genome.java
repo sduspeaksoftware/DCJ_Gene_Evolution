@@ -1,12 +1,17 @@
 import java.util.ArrayList;
 public class Genome implements Cloneable{
-	int numOfGenes;
+	//int numOfGenes;
 	boolean circular = false;
 	ArrayList<Node> geneNodeList = new ArrayList<Node>();
 	
-	public Genome(Node node) {
+	public Genome(String names[]) {
 		//geneNodeList加个头
 		this.addExHead();
+		for(String i : names) {
+			addGene(i);
+		}
+		this.addExTail();
+		this.buildAllLineLink();
 	}
 	
 	/* 加基因链头 */
