@@ -3,7 +3,7 @@ public class Node {
 	Node sameLink;
 	Node diffLink;
 	String nameht;
-	boolean searched=false;
+	boolean searched = false;
 	
 	public Node() {
 		
@@ -39,7 +39,7 @@ public class Node {
 	public void print() {
 		String aa = (sameLink==null ? "  " : sameLink.nameht);
 		String bb = (diffLink==null ? "  " : diffLink.nameht);
-		System.out.println("\tNode " + this.nameht + ": sameLink->" + aa + ", diffLink->" + bb);
+		System.out.println("\tNode " + this.nameht + ": sameLink->" + aa + ", diffLink->" + bb + ", searched->" + searched);
 	}
 	
 	/* 标记所有与该点相连的环上的点,有 null link 返回 false */
@@ -47,10 +47,6 @@ public class Node {
 		boolean flagLink = true;
 		if(!this.searched) {
 			this.searched = true;
-			//System.out.print(this.nameht + ",");
-			//如果连到这里断了
-			if(this.sameLink == null || this.diffLink == null)
-				return false;  //这种情况不是个环
 			//如果有左右link,判断左右link是否断了
 			if(this.sameLink != null) {  //判空
 				boolean f = this.sameLink.searchLink();
@@ -62,6 +58,9 @@ public class Node {
 				if(f == false)
 					flagLink = false;  //只要difflink断就false了
 			}
+			//如果连到这里断了
+			if(this.sameLink == null || this.diffLink == null)
+				flagLink = false;  //这种情况不是个环
 			return flagLink;
 		}
 		return true;

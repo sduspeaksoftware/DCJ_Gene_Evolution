@@ -11,7 +11,7 @@ public class Gene {
 		}else{
 			this.name = name;
 		}
-		//头尾节点
+		//头尾节点���ð�
 		this.head = new Node(name, "head");
 		this.tail = new Node(name, "tail");
 		this.head.father = this;
