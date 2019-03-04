@@ -4,6 +4,9 @@ public class Genome implements Cloneable{
 	boolean circular = false;
 	ArrayList<Node> geneNodeList = new ArrayList<Node>();
 	
+	public Genome() {
+		
+	}
 	public Genome(String names[]) {
 		//geneNodeList加个头
 		this.addExHead();
@@ -18,12 +21,7 @@ public class Genome implements Cloneable{
 	public void addExHead() {
 		this.geneNodeList.add(new Node("exhead", "ex"));
 	}
-	/* 加基因链尾 */
-	public void addExTail() {
-		this.geneNodeList.add(new Node("extail", "ex"));
-		this.buildAllLineLink();  //加上extail后立刻执行全链连接
-		Log.i("Genome ExTail added, auto link all line.");
-	}
+	
 	
 	public void addGene(String name) {
 		Gene g = new Gene(name);
@@ -34,6 +32,12 @@ public class Genome implements Cloneable{
 			geneNodeList.add(g.head);
 			geneNodeList.add(g.tail);
 		}
+	}
+	/* 加基因链尾 */
+	public void addExTail() {
+		this.geneNodeList.add(new Node("extail", "ex"));
+		this.buildAllLineLink();  //加上extail后立刻执行全链连接
+		Log.i("Genome ExTail added, auto link all line.");
 	}
 	
 	/* 添加Node完毕后全链连接 */
@@ -47,46 +51,65 @@ public class Genome implements Cloneable{
 	
 	@Override
 	public Object clone() {
-		Genome cloneT = (Genome)this.clone();
+		Genome cloneT = new Genome();
 		ArrayList<Node> gnlCloneT = new ArrayList<Node>();
-		for(Node i : cloneT.geneNodeList) {
+		for(Node i : this.geneNodeList) {
 			gnlCloneT.add((Node)i.clone());
 		}
 		cloneT.geneNodeList = gnlCloneT;
+		//cloneT.print();
 		return (Object)cloneT;
 	}
 	
-	public static void diguiLoopNode(Genome genome1, Genome genome2) {
+	public static int diguiLoopNode(Genome genome1, Genome genome2) {
 		int maxNum=0;
-		
 		
 		Genome g1 = (Genome)genome1.clone();
 		Genome g2 = (Genome)genome2.clone();
 		for(Node i : g1.geneNodeList) {
+			//System.out.println("Hello");
 			if(i.diffLink == null) {
+				//System.out.println("Hi");
 				for(Node j:g2.geneNodeList) {
-					if (i.nameht ==j.nameht && j.diffLink ==null) {
+					//System.out.println("i: " + i.nameht);
+					//System.out.println("j: " + j.nameht + j.diffLink );
+					if (i.nameht.equals(j.nameht) && j.diffLink == null) {
+						//System.out.println("Link: " +i.nameht + " with " + j.nameht);
 						i.diffLink =j;
 						j.diffLink =i;
-						diguiLoopNode(g1,g2);
+						if(i.nameht.equals("extail")) {
+							g1.print();
+							return getNumOfCircles(g1, g2);
+						}
+						int temp = diguiLoopNode(g1,g2);
+						maxNum = Math.max(maxNum, temp);
 					}
 				}
 			}
 		}
-		if (getNumOfCircles(g1,g2)>maxNum)
-			maxNum=getNumOfCircles(g1,g2);
 		
+		return maxNum;
 	}
 
 	private static int getNumOfCircles(Genome g1, Genome g2) {
 		int num = 0;
 		for(Node i : g1.geneNodeList) {
 			if(!i.searched) {
+				//System.out.print("Search Circle from point " + i.nameht + ": ");
 				if(i.searchLink()) {
 					num++;
 				}
+				//System.out.println();
 			}
 		}
 		return num;
+	}
+	
+	public void print() {
+		System.out.println("Genome: ");
+		for(Node n : geneNodeList) {
+			n.print();
+		}
+		System.out.println();
 	}
 }
