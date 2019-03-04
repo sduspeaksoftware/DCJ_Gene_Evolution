@@ -16,6 +16,6 @@ public class Main {
 		g2.print();
 		
 		int a = Genome.diguiLoopNode(g1,g2);
-		System.out.println(a);
+		System.out.println("Result: " + a);
 	}
 }

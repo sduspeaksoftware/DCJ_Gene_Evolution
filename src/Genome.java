@@ -25,7 +25,7 @@ public class Genome implements Cloneable{
 	
 	public void addGene(String name) {
 		Gene g = new Gene(name);
-		if (!g.reverse) {
+		if (g.reverse) {
 			geneNodeList.add(g.tail);
 			geneNodeList.add(g.head);
 		} else {
@@ -78,9 +78,11 @@ public class Genome implements Cloneable{
 	
 	public static int diguiLoopNode(Genome g1, Genome g2) {
 		int maxNum=0;
+		boolean oh = false;
 		
 		for(Node i : g1.geneNodeList) {
 			if(i.diffLink == null) {
+				oh = true;
 				//System.out.println("i: " + i.nameht);
 				for(Node j : g2.geneNodeList) {
 					if (i.nameht.equals(j.nameht) && j.diffLink == null) {
@@ -91,9 +93,9 @@ public class Genome implements Cloneable{
 							if(!g1.checkNoDiffLinkPoint()) {
 								return 0;
 							}
-							System.out.println("结果之一：");
-							g1.print();
-							g2.print();
+							//System.out.println("结果之一：");
+							//g1.print();
+							//g2.print();
 							int temp = getNumOfCircles(g1, g2);
 							i.diffLink = null;
 							j.diffLink = null;
@@ -106,6 +108,8 @@ public class Genome implements Cloneable{
 					}
 				}
 			}
+			if(oh)
+				break;
 		}
 		
 		return maxNum;
