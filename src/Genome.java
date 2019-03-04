@@ -57,6 +57,9 @@ public class Genome implements Cloneable{
 	}
 	
 	public static void diguiLoopNode(Genome genome1, Genome genome2) {
+		int maxNum=0;
+		
+		
 		Genome g1 = (Genome)genome1.clone();
 		Genome g2 = (Genome)genome2.clone();
 		for(Node i : g1.geneNodeList) {
@@ -70,7 +73,9 @@ public class Genome implements Cloneable{
 				}
 			}
 		}
-		System.out.println(getNumOfCircles(g1,g2));
+		if (getNumOfCircles(g1,g2)>maxNum)
+			maxNum=getNumOfCircles(g1,g2);
+		
 	}
 
 	private static int getNumOfCircles(Genome g1, Genome g2) {
