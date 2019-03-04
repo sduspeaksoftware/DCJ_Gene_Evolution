@@ -49,6 +49,14 @@ public class Genome implements Cloneable{
 		}
 	}
 	
+	public boolean checkNoDiffLinkPoint() {
+		for(Node n : geneNodeList) {
+			if(n.diffLink == null)
+				return false;
+		}
+		return true;
+	}
+	
 	/* 置所有Node被找过为false */
 	public void cleanSearchedOfNodes() {
 		for(Node n : geneNodeList) {
@@ -73,15 +81,23 @@ public class Genome implements Cloneable{
 		
 		for(Node i : g1.geneNodeList) {
 			if(i.diffLink == null) {
-				for(Node j:g2.geneNodeList) {
+				//System.out.println("i: " + i.nameht);
+				for(Node j : g2.geneNodeList) {
 					if (i.nameht.equals(j.nameht) && j.diffLink == null) {
+						//System.out.println("j: " + j.nameht);
 						i.diffLink = j;
 						j.diffLink = i;
 						if(i.nameht.equals("extail")) {
+							if(!g1.checkNoDiffLinkPoint()) {
+								return 0;
+							}
 							System.out.println("结果之一：");
 							g1.print();
 							g2.print();
-							return getNumOfCircles(g1, g2);
+							int temp = getNumOfCircles(g1, g2);
+							i.diffLink = null;
+							j.diffLink = null;
+							return temp;
 						}
 						int temp = diguiLoopNode(g1, g2);
 						maxNum = Math.max(maxNum, temp);
@@ -101,12 +117,12 @@ public class Genome implements Cloneable{
 			if(!i.searched) {
 				//System.out.println(i.nameht + " not searched.");
 				if(i.searchLink()) {
-					g1.cleanSearchedOfNodes();
-					g2.cleanSearchedOfNodes();
 					num++;
 				}
 			}
 		}
+		g1.cleanSearchedOfNodes();
+		g2.cleanSearchedOfNodes();
 		return num;
 	}
 	
