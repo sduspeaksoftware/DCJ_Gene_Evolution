@@ -3,6 +3,7 @@ public class Node {
 	Node sameLink;
 	Node diffLink;
 	String nameht;
+	Node samegene;
 	boolean searched = false;
 	public Node() {
 		
@@ -23,7 +24,8 @@ public class Node {
 		}else{
 			assert(false);
 			System.out.println("Wrong Gene Node type!");
-		}	
+		}
+		
 	}
 	
 	@Override
@@ -34,12 +36,13 @@ public class Node {
 		n.diffLink = diffLink;
 		n.nameht = nameht;
 		n.searched = searched;
+		n.samegene = samegene;
 		return n;
 	}
 	
 	public void print() {
 		String aa = (sameLink==null ? "  " : sameLink.nameht + "[" + this.father.number + "]");
-		String bb = (diffLink==null ? "  " : diffLink.nameht + "[" + this.father.number + "]");
+		String bb = (diffLink==null ? "  " : diffLink.nameht + "[" + diffLink.father.number + "]");
 		System.out.println("\tNode " + this.nameht + "[" + this.father.number + "]: sameLink->" + aa + ", diffLink->" + bb);
 	}
 	

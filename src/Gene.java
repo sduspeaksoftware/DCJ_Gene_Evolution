@@ -21,6 +21,8 @@ public class Gene {
 		this.tail = new Node(name, "tail");
 		this.head.father = this;
 		this.tail.father = this;
+		this.head.samegene=this.tail;
+		this.tail.samegene=this.head;
 	}
 	
 }
