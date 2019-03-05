@@ -1,9 +1,14 @@
 public class Gene {
 	boolean reverse = false;  //正反
+	int number = 0;
 	Node head;
 	Node tail;
 	String name;
-	public Gene(String name){
+	public Gene() {
+		
+	}
+	public Gene(String name, int number){
+		this.number = number;
 		//判断正反
 		if(name.charAt(0) == '-'){
 			this.reverse = true;

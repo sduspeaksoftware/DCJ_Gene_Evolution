@@ -4,7 +4,6 @@ public class Node {
 	Node diffLink;
 	String nameht;
 	boolean searched = false;
-	String namehtn;
 	public Node() {
 		
 	}
@@ -20,6 +19,7 @@ public class Node {
 			this.nameht = name + "t";
 		}else if(type.contentEquals("ex")) {
 			this.nameht = name;
+			this.father = new Gene();
 		}else{
 			assert(false);
 			System.out.println("Wrong Gene Node type!");
@@ -38,9 +38,9 @@ public class Node {
 	}
 	
 	public void print() {
-		String aa = (sameLink==null ? "  " : sameLink.namehtn);
-		String bb = (diffLink==null ? "  " : diffLink.namehtn);
-		System.out.println("\tNode " + this.namehtn + ": sameLink->" + aa + ", diffLink->" + bb);
+		String aa = (sameLink==null ? "  " : sameLink.nameht + "[" + this.father.number + "]");
+		String bb = (diffLink==null ? "  " : diffLink.nameht + "[" + this.father.number + "]");
+		System.out.println("\tNode " + this.nameht + "[" + this.father.number + "]: sameLink->" + aa + ", diffLink->" + bb);
 	}
 	
 	/* 标记所有与该点相连的环上的点,有 null link 返回 false */

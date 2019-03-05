@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 public class Genome implements Cloneable{
-	//int numOfGenes;
+	static int count = 1;
 	boolean circular = false;
 	ArrayList<Node> geneNodeList = new ArrayList<Node>();
 	
@@ -24,7 +24,7 @@ public class Genome implements Cloneable{
 	
 	
 	public void addGene(String name) {
-		Gene g = new Gene(name);
+		Gene g = new Gene(name, count++);
 		if (g.reverse) {
 			geneNodeList.add(g.tail);
 			geneNodeList.add(g.head);
@@ -45,8 +45,6 @@ public class Genome implements Cloneable{
 	private void buildAllLineLink() {
 		for(int i=0; i<this.geneNodeList.size(); i++) {
 			this.geneNodeList.get(i).sameLink = this.geneNodeList.get(i + 1);
-			this.geneNodeList.get(i).namehtn = this.geneNodeList.get(i).nameht+String.valueOf(i);
-			this.geneNodeList.get(i+1).namehtn = this.geneNodeList.get(i+1).nameht+String.valueOf(i+1);
 			this.geneNodeList.get(i + 1).sameLink = this.geneNodeList.get(i);
 			i++;
 		}
