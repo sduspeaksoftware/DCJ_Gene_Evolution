@@ -4,7 +4,7 @@ public class Node {
 	Node diffLink;
 	String nameht;
 	boolean searched = false;
-	
+	String namehtn;
 	public Node() {
 		
 	}
@@ -12,6 +12,7 @@ public class Node {
 	 * @param name:鍩哄洜鍚�
 	 * @param type:澶村熬绫诲瀷,head鎴杢ail
 	 */
+	
 	public Node(String name, String type){
 		if(type.equals("head")){
 			this.nameht = name + "h";
@@ -37,9 +38,9 @@ public class Node {
 	}
 	
 	public void print() {
-		String aa = (sameLink==null ? "  " : sameLink.nameht);
-		String bb = (diffLink==null ? "  " : diffLink.nameht);
-		System.out.println("\tNode " + this.nameht + ": sameLink->" + aa + ", diffLink->" + bb + ", searched->" + searched);
+		String aa = (sameLink==null ? "  " : sameLink.namehtn);
+		String bb = (diffLink==null ? "  " : diffLink.namehtn);
+		System.out.println("\tNode " + this.namehtn + ": sameLink->" + aa + ", diffLink->" + bb);
 	}
 	
 	/* 标记所有与该点相连的环上的点,有 null link 返回 false */

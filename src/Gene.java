@@ -17,4 +17,5 @@ public class Gene {
 		this.head.father = this;
 		this.tail.father = this;
 	}
+	
 }

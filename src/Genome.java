@@ -33,6 +33,7 @@ public class Genome implements Cloneable{
 			geneNodeList.add(g.tail);
 		}
 	}
+	
 	/* 加基因链尾 */
 	public void addExTail() {
 		this.geneNodeList.add(new Node("extail", "ex"));
@@ -44,6 +45,8 @@ public class Genome implements Cloneable{
 	private void buildAllLineLink() {
 		for(int i=0; i<this.geneNodeList.size(); i++) {
 			this.geneNodeList.get(i).sameLink = this.geneNodeList.get(i + 1);
+			this.geneNodeList.get(i).namehtn = this.geneNodeList.get(i).nameht+String.valueOf(i);
+			this.geneNodeList.get(i+1).namehtn = this.geneNodeList.get(i+1).nameht+String.valueOf(i+1);
 			this.geneNodeList.get(i + 1).sameLink = this.geneNodeList.get(i);
 			i++;
 		}
@@ -83,22 +86,22 @@ public class Genome implements Cloneable{
 		for(Node i : g1.geneNodeList) {
 			if(i.diffLink == null) {
 				oh = true;
-				//System.out.println("i: " + i.nameht);
 				for(Node j : g2.geneNodeList) {
 					if (i.nameht.equals(j.nameht) && j.diffLink == null) {
-						//System.out.println("j: " + j.nameht);
 						i.diffLink = j;
 						j.diffLink = i;
 						if(i.nameht.equals("extail")) {
 							if(!g1.checkNoDiffLinkPoint()) {
 								return 0;
 							}
-							//System.out.println("结果之一：");
-							//g1.print();
+							
+							System.out.println("结果之一：");
+							g1.print();
 							//g2.print();
 							int temp = getNumOfCircles(g1, g2);
 							i.diffLink = null;
 							j.diffLink = null;
+							System.out.println("以上连接方式的temp: "+temp);							
 							return temp;
 						}
 						int temp = diguiLoopNode(g1, g2);
