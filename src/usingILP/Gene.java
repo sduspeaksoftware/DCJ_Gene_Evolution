@@ -1,16 +1,16 @@
 package usingILP;
 
 public class Gene {
+	static int count = 1;
 	boolean reverse = false;  //正反
-	int number = 0;
+	int number = count++;
 	Node head;
 	Node tail;
 	String name;
 	public Gene() {
 		
 	}
-	public Gene(String name, int number){
-		this.number = number;
+	public Gene(String name){
 		//判断正反
 		if(name.charAt(0) == '-'){
 			this.reverse = true;

@@ -13,7 +13,7 @@ public class Main {
 		String genome2=s.next();
 		Genome g2 = new Genome(genome2.split(","));
 
-		buildAllDiffLink(g1,g2);//现在是一个所有difflink都存在的完整的图
+		buildAllDiffLinks(g1,g2);//现在是一个所有difflink都存在的完整的图
 		
 		
 
@@ -21,16 +21,16 @@ public class Main {
 //		System.out.println("Result: " + a);
 	}
 	
-	public static void buildAllDiffLink(Genome g1,Genome g2) {
+	public static void buildAllDiffLinks(Genome g1,Genome g2) {
 		for (Node i: g1.geneNodeList ) {
 			for (Node j: g2.geneNodeList ) {
 				if (i.nameht.contentEquals(j.nameht)) {
-					i.diffLink.add(j);
-					j.diffLink.add(i);
+					i.diffLinks.add(j);
+					j.diffLinks.add(i);
 					if(!i.nameht.equals("extail")) {
 						if(!i.nameht.equals("exhead")) {
-							i.samegene.diffLink.add(j.samegene);
-							j.samegene.diffLink.add(i.samegene);
+							i.samegene.diffLinks.add(j.samegene);
+							j.samegene.diffLinks.add(i.samegene);
 						}
 					}
 				}

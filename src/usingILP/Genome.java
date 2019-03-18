@@ -1,7 +1,6 @@
 package usingILP;
 import java.util.ArrayList;
 public class Genome implements Cloneable{
-	static int count = 1;
 	boolean circular = false;
 	ArrayList<Node> geneNodeList = new ArrayList<Node>();
 	
@@ -29,7 +28,7 @@ public class Genome implements Cloneable{
 	
 	
 	public void addGene(String name) {
-		Gene g = new Gene(name, count++);
+		Gene g = new Gene(name);
 		if (g.reverse) {
 			geneNodeList.add(g.head);
 			geneNodeList.add(g.tail);

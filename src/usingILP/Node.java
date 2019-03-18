@@ -3,19 +3,30 @@ package usingILP;
 import java.util.ArrayList;
 
 public class Node {
+	static int count = 1;
 	Gene father;
 	Node sameLink;
-	ArrayList<Node> diffLink=new ArrayList<Node>();
+	ArrayList<Node> diffLinks=new ArrayList<Node>();
 	String nameht;
 	Node samegene;
 	boolean searched = false;
-	int x=0;
+	int x;
+	int y;
+	int z;
+	int number = count++;
 	
-	boolean alreadyx=false;
 	public Node() {
 		
 	}
 	
+	public int link(Node i,Node j) {
+		if (i.sameLink.equals(j)||i.diffLinks.contains(j)) {
+			x=1;
+		}
+		else
+			x=0;
+		return x;
+	}
 	
 	public Node(String name, String type){
 		if(type.equals("head")){
@@ -38,11 +49,10 @@ public class Node {
 		Node n = new Node();
 		n.father = father;
 		n.sameLink = sameLink;
-		n.diffLink = diffLink;
+		n.diffLinks = diffLinks;
 		n.nameht = nameht;
 		n.searched = searched;
 		n.samegene = samegene;
-		n.x = x;
 		return n;
 	}
 	
