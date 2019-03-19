@@ -21,6 +21,7 @@ public class Genome implements Cloneable{
 //		this.geneNodeList.add(new Node("exhead","ex"));
 //		this.geneNodeList.add(new Node("extail","ex"));
 //	}
+	
 	/* 加基因链头 */
 	public void addExHead() {
 		this.geneNodeList.add(new Node("exhead", "ex"));
@@ -53,6 +54,4 @@ public class Genome implements Cloneable{
 			i++;
 		}
 	}
-	
-
 }

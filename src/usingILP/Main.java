@@ -4,16 +4,14 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
 		//输入两组基因组
-		Scanner s=new Scanner(System.in);
+		Scanner scan = new Scanner(System.in);
 		
 		System.out.println("输入原基因组序列，以逗号分隔基因");
-		String genome1=s.next();
-		Genome g1 = new Genome(genome1.split(","));
+		Genome g1 = new Genome(scan.next().split(","));
 		System.out.println("输入变异后的基因组序列，以逗号分隔基因");
-		String genome2=s.next();
-		Genome g2 = new Genome(genome2.split(","));
+		Genome g2 = new Genome(scan.next().split(","));
 
-		buildAllDiffLinks(g1,g2);//现在是一个所有difflink都存在的完整的图
+		buildAllDiffLinks(g1,g2); //现在是一个所有difflink都存在的完整的图
 		
 		
 
@@ -27,11 +25,9 @@ public class Main {
 				if (i.nameht.contentEquals(j.nameht)) {
 					i.diffLinks.add(j);
 					j.diffLinks.add(i);
-					if(!i.nameht.equals("extail")) {
-						if(!i.nameht.equals("exhead")) {
-							i.samegene.diffLinks.add(j.samegene);
-							j.samegene.diffLinks.add(i.samegene);
-						}
+					if(!i.nameht.equals("extail") && !i.nameht.equals("exhead")) {
+						i.samegene.diffLinks.add(j.samegene);
+						j.samegene.diffLinks.add(i.samegene);
 					}
 				}
 			}

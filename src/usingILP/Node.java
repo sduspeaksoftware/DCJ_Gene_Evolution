@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Node {
 	static int count = 1;
-	Gene father;
-	Node sameLink;
-	ArrayList<Node> diffLinks=new ArrayList<Node>();
 	String nameht;
-	Node samegene;
+	Gene father;
+	Node sameLink; //同侧连接的Node
+	Node samegene; //同Gene异端Node
+	ArrayList<Node> diffLinks = new ArrayList<Node>();
 	boolean searched = false;
 	int x;
 	int y;
@@ -18,7 +18,7 @@ public class Node {
 	public Node() {
 		
 	}
-	
+
 	public int link(Node i,Node j) {
 		if (i.sameLink.equals(j)||i.diffLinks.contains(j)) {
 			x=1;
@@ -27,7 +27,7 @@ public class Node {
 			x=0;
 		return x;
 	}
-	
+
 	public Node(String name, String type){
 		if(type.equals("head")){
 			this.nameht = name + "h";
@@ -42,8 +42,7 @@ public class Node {
 		}
 		
 	}
-	
-	
+
 	@Override
 	public Object clone() {
 		Node n = new Node();
@@ -55,5 +54,4 @@ public class Node {
 		n.samegene = samegene;
 		return n;
 	}
-	
 }

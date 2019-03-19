@@ -28,6 +28,12 @@ public class Solution {
 		
 		}*/
 	}
-
 	
+	public static void ilp2(Genome g1,Genome g2) {
+		ILP ilp = new ILP(g1.geneNodeList.size());
+		//1.对位同名Node连接总数=1
+		
+		//2.对位同名Node必须首尾同时连或同时不连
+		
+	}
 }

@@ -4,9 +4,10 @@ public class Gene {
 	static int count = 1;
 	boolean reverse = false;  //正反
 	int number = count++;
+	String name;
 	Node head;
 	Node tail;
-	String name;
+	
 	public Gene() {
 		
 	}
@@ -23,7 +24,7 @@ public class Gene {
 		this.tail = new Node(name, "tail");
 		this.head.father = this;
 		this.tail.father = this;
-		this.head.samegene=this.tail;
-		this.tail.samegene=this.head;
+		this.head.samegene = this.tail;
+		this.tail.samegene = this.head;
 	}
 }
