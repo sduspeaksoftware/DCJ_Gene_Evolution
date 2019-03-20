@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Node {
 	static int count = 1;
 	String nameht;
+	String type; //head or tail
 	Gene father;
 	Node sameLink; //同侧连接的Node
 	Node samegene; //同Gene异端Node
@@ -29,6 +30,7 @@ public class Node {
 	}
 
 	public Node(String name, String type){
+		this.type = type;
 		if(type.equals("head")){
 			this.nameht = name + "h";
 		}else if(type.equals("tail")){

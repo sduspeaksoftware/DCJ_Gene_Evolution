@@ -34,4 +34,8 @@ public class ILP {
 		this.A.add(array);
 		this.b.add(b);
 	}
+	
+	public void compute() {
+		
+	}
 }
