@@ -56,7 +56,7 @@ public class Solution {
 		HashMap<Integer, Integer> noeq = new HashMap<Integer, Integer>();
 		for(Node i: g1.geneNodeList) {
 			for(Node j: g2.geneNodeList) {
-				//1.x(e)<=1, -x(e)<=0
+				//1.0<=x(e)<=1
 				noeq = new HashMap<Integer, Integer>();
 				noeq.put(ilp.ijToE(i.number, j.number), 1); //1*xe
 				ilp.addNoEquation(noeq, 1); //xe<=1
@@ -85,6 +85,8 @@ public class Solution {
 			noeq = new HashMap<Integer, Integer>();
 			noeq.put(ilp.yiToE(i.number), 1);
 			ilp.addNoEquation(noeq, i.number); //yi<=i
+			noeq.put(ilp.ziToE(i.number), i.number);
+			ilp.addNoEquation(noeq, ilp.yiToE(i.number));//i*zi<=yi
 		}
 		//5.0<=yj<=j
 		for(Node i: g2.geneNodeList) {
@@ -94,8 +96,10 @@ public class Solution {
 			noeq = new HashMap<Integer, Integer>();
 			noeq.put(ilp.yiToE(i.number), 1);
 			ilp.addNoEquation(noeq, i.number); //yi<=i
+			noeq.put(ilp.ziToE(i.number), i.number);
+			ilp.addNoEquation(noeq, ilp.yiToE(i.number));//i*zi<=yi
 		}
 		//ËÍmatlab¼ÆËã
-		ilp.compute();
+		ilp.computeILP();
 	}
 }

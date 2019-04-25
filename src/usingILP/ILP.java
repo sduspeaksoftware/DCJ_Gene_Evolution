@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import com.mathworks.toolbox.javabuilder.MWException;
+
+import mysimplexMax.compute;
+
 public class ILP {
 	int k; //基因单链长
 	int xLength; //x之长度
@@ -16,7 +20,7 @@ public class ILP {
 		this.b = new ArrayList<Integer>();
 		this.beq = new ArrayList<Integer>();
 		this.k = k;
-		this.xLength = k * k + k * 2;
+		this.xLength = k * k + k * 4;
 	}
 	
 	/* 添加等式kx=b */
@@ -52,12 +56,18 @@ public class ILP {
 		this.A.add(array);
 		this.b.add(b);
 	}
-	
-	public void compute() {
-		//TODO
+	public void computeILP() {
+		compute computations=null;
+		try {
+			computations=new compute();
+			computations.mysimplexMax(A,b);
+		} catch (MWException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
-	
+
 	public int ijToE(int i, int j) {
 		//若用x(e)表示x(i,j),则 e = (i-1)*k + (j-1-k)
 		return (i-1)*xLength + (j-1-xLength);
@@ -75,5 +85,9 @@ public class ILP {
 	}
 	public int eToYi(int e) {
 		return e - k*k + 1;
+	}
+
+	public int ziToE(int i) {
+		return k*k+i-1+2*k;
 	}
 }
