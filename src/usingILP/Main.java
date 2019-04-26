@@ -16,7 +16,7 @@ public class Main {
 		
 
 		
-//		System.out.println("Result: " + a);
+		System.out.println("a");
 	}
 	
 	public static void buildAllDiffLinks(Genome g1,Genome g2) {

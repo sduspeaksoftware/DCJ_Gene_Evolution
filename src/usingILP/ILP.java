@@ -6,6 +6,10 @@ import java.util.HashMap;
 
 import com.mathworks.toolbox.javabuilder.MWException;
 
+import matlabcontrol.MatlabConnectionException;
+import matlabcontrol.MatlabInvocationException;
+import matlabcontrol.MatlabProxy;
+import matlabcontrol.MatlabProxyFactory;
 import mysimplexMax.compute;
 
 public class ILP {
@@ -56,16 +60,32 @@ public class ILP {
 		this.A.add(array);
 		this.b.add(b);
 	}
-	public void computeILP() {
-		compute computations=null;
-		try {
-			computations=new compute();
-			computations.mysimplexMax(A,b);
-		} catch (MWException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void computeILP(){
 		
+		MatlabProxyFactory factory = new MatlabProxyFactory(); 
+		MatlabProxy proxy;
+		try {
+			proxy = factory.getProxy(); 
+			Object[] result1;
+			result1 = proxy.returningFeval("mysimplexMax",3,A,b,Aeq,beq,k);
+			double[] r=(double[]) result1[0];
+			System.out.print("f:");
+			for (int i = 0; i < r.length; i++) {
+				System.out.print(r[i]);
+				}
+			double[] x=(double[]) result1[1];
+			System.out.println();
+			System.out.print("x:");
+			for (int i = 0; i < x.length; i++) {
+				System.out.print(x[i]);
+				}
+			}
+			catch (Exception e){
+				System.out.println("这是我自己抛出的一个异常！");
+			}
+			finally {
+				
+			}
 	}
 
 	public int ijToE(int i, int j) {

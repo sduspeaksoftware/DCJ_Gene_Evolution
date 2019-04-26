@@ -100,6 +100,11 @@ public class Solution {
 			ilp.addNoEquation(noeq, ilp.yiToE(i.number));//i*zi<=yi
 		}
 		//ËÍmatlab¼ÆËã
-		ilp.computeILP();
+		try {
+			ilp.computeILP();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
