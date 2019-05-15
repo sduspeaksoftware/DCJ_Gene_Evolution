@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
+		long b= System.currentTimeMillis();
 		//输入两组基因组
 		Scanner s=new Scanner(System.in);
 		
@@ -17,5 +18,7 @@ public class Main {
 		
 		int a = Genome.diguiLoopNode(g1,g2);
 		System.out.println("Result: " + a);
-	}
+		System.out.print("程序执行时间为：");
+		System.out.println(System.currentTimeMillis()-b+"毫秒");
+	}	 
 }

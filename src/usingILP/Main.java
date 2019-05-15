@@ -12,13 +12,11 @@ public class Main {
 		Genome g2 = new Genome(scan.next().split(","));
 
 		buildAllDiffLinks(g1,g2); //现在是一个所有difflink都存在的完整的图
-		
-		
 
-		
+//		Solution.grbilp(g1, g2);
 		System.out.println("a");
 	}
-	
+
 	public static void buildAllDiffLinks(Genome g1,Genome g2) {
 		for (Node i: g1.geneNodeList ) {
 			for (Node j: g2.geneNodeList ) {

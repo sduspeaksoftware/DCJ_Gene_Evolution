@@ -47,6 +47,7 @@ public class Solution {
 					int equationRight2 = 0;
 					equationLeft2.put(ilp.ijToE(i.number, j.number), 1);
 					equationLeft2.put(ilp.ijToE(i.samegene.number, j.samegene.number), -1);
+//					System.out.println("i="+i.number+" "+"j="+j.number+" "+"i.samegene="+i.samegene.number+" "+"j.samegene="+j.samegene.number);
 					ilp.addEquation(equationLeft2, equationRight2);
 				}
 				ilp.addEquation(equationLeft, equationRight);
@@ -101,7 +102,7 @@ public class Solution {
 		}
 		//ÀÕmatlabº∆À„
 		try {
-			ilp.computeILP();
+//			ilp.computeILP();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
