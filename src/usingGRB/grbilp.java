@@ -4,8 +4,8 @@ import gurobi.*;
 
 public class grbilp {
 	//并不知道为什么k无法导入，应当为v1=2k；
-	static int V1 = 10;
-	static int V2 = 10;
+	static int V1 ;
+	static int V2 ;
 	static int[][] edges = new int[V1][V2];
 	
 	public static void init() {
@@ -20,11 +20,12 @@ public class grbilp {
 			edges[i][i-1] = 1;
 			i++;
 		}
+		edges[0][V1/2]=edges[V1/2-1][V1-1]=1;
 	}
 
-	public static void Grbilp(String[] args) {
+	public static void Grbilp(int k) {
 		// TODO Auto-generated method stub
-		
+		V1=V2=2*k;
 		init();
 		
 		try {
@@ -77,7 +78,7 @@ public class grbilp {
 					GRBLinExpr linExpr1 = new GRBLinExpr();
 					linExpr1.addTerm(-i, x[i][j]);
 					linExpr1.addTerm(i, constant1);
-					model.addConstr(linExpr, GRB.LESS_EQUAL, linExpr1, "c2_"+i);
+					model.addConstr(linExpr, GRB.LESS_EQUAL, linExpr1, "c5_"+i);
 					right.addTerm(1, y1[i]);
 					right.addTerm(-1, y1[j]);
 					model.addConstr(linExpr, GRB.GREATER_EQUAL, right, "c4_"+i);
@@ -87,11 +88,15 @@ public class grbilp {
 					linExpr1 = new GRBLinExpr();
 					linExpr1.addTerm(-j, x[i][j]);
 					linExpr1.addTerm(j, constant1);
-					model.addConstr(linExpr, GRB.LESS_EQUAL, linExpr1, "c2_"+i);
+					model.addConstr(linExpr, GRB.LESS_EQUAL, linExpr1, "c6_"+i);
 				}
 			}
 			//TODO:constaints related to edges:fh=gh->ft=gt;
-				
+			for(int i=0;i<V1;i++) {
+				for(int j=0;j<V2;j++) {
+					model.addConstr(x[i][j], GRB.EQUAL, x[j][i], "edge_"+i+""+j);
+				}
+			}
 			// Optimize
 			
 		    model.optimize();

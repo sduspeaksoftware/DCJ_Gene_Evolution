@@ -8,11 +8,6 @@ public class Node {
 	public Node() {
 		
 	}
-	/*
-	 * @param name:鍩哄洜鍚�
-	 * @param type:澶村熬绫诲瀷,head鎴杢ail
-	 */
-	
 	public Node(String name, String type){
 		if(type.equals("head")){
 			this.nameht = name + "h";
@@ -24,8 +19,7 @@ public class Node {
 		}else{
 			assert(false);
 			System.out.println("Wrong Gene Node type!");
-		}
-		
+		}		
 	}
 	
 	@Override
@@ -38,14 +32,12 @@ public class Node {
 		n.searched = searched;
 		n.samegene = samegene;
 		return n;
-	}
-	
+	}	
 	public void print() {
 		String aa = (sameLink==null ? "  " : sameLink.nameht + "[" + this.father.number + "]");
 		String bb = (diffLink==null ? "  " : diffLink.nameht + "[" + diffLink.father.number + "]");
 		System.out.println("\tNode " + this.nameht + "[" + this.father.number + "]: sameLink->" + aa + ", diffLink->" + bb);
-	}
-	
+	}	
 	/* 标记所有与该点相连的环上的点,有 null link 返回 false */
 	public boolean searchLink() {
 		boolean flagLink = true;
